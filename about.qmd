@@ -1,0 +1,5 @@
+---
+title: "About"
+---
+
+Most of the content here is from the CAMEO Codebook, March 2012 version, from [Phil Schrodt's website](https://eventdata.parusanalytics.com/data.dir/cameo.html).

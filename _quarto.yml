@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "CAMEO"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - href: event-types.qmd
+        text: Event Types
+      - href: event-type-list.qmd
+        text: Event Type List
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

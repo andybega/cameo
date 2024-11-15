@@ -1,0 +1,42 @@
+---
+title: "Verb Codebook"
+format: 
+  html:
+    toc: true
+---
+
+```{r}
+#| echo: false
+#| results: asis
+#| output: asis
+
+suppressPackageStartupMessages({
+  library(readr)
+  library(stringr)
+  library(dplyr)
+})
+
+
+et <- read_csv("data/eventtypes.csv", show_col_types = FALSE)
+et <- et |> 
+  mutate(usage_notes = str_replace_all(usage_notes, "(‚Äú)|(‚Äù)", "\""),
+         usage_notes = str_replace_all(usage_notes, "‚Äô", "'"),
+         example = str_replace_all(example, "(‚Äú)|(‚Äù)", "\""),
+         example = str_replace_all(example, "‚Äô", "'"))
+
+for (i in 1:nrow(et)) {
+  row <- et[i, ]
+  if (nchar(row$code)==2) {
+    cat(paste0("## ", row[["name"]], "\n\n"))
+    next
+  } else {
+    cat(paste0(paste0(rep("#", nchar(row[["code"]])), collapse = ""), " ", row[["name"]], "\n\n"))
+    cat(paste0("**Code:** ", row[["code"]], "<br/>"))
+    cat(paste0("**Description:** ", row[["description"]], "<br/>"))
+    cat(paste0("**Usage Notes:** ", row[["usage_notes"]], "<br/>"))
+    cat(paste0("**Example:** ", row[["example"]], "\n\n"))
+  }
+}
+
+```
+

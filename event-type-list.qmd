@@ -1,0 +1,34 @@
+---
+title: "Event Type List"
+---
+
+```{r}
+#| echo: false
+#| results: asis
+#| output: asis
+
+suppressPackageStartupMessages({
+  library(readr)
+  library(stringr)
+  library(dplyr)
+})
+
+et <- read_csv("data/eventtypes.csv", show_col_types = FALSE)
+et <- et |> 
+  mutate(usage_notes = str_replace_all(usage_notes, "(‚Äú)|(‚Äù)", "\""),
+         usage_notes = str_replace_all(usage_notes, "‚Äô", "'"),
+         example = str_replace_all(example, "(‚Äú)|(‚Äù)", "\""),
+         example = str_replace_all(example, "‚Äô", "'"))
+
+
+for (i in 1:nrow(et)) {
+  row <- et[i, ]
+  if (nchar(row$code)==2) {
+    cat(paste0("\n\n**", row[["code"]], ": ", row[["name"]], "**<br />"))
+  } else if (nchar(row$code)==4) {
+    cat(paste0("&emsp;", row[["code"]], ": ", row[["name"]], "<br />"))
+  } else {
+    cat(paste0(row[["code"]], ": ", row[["name"]], "<br />"))
+  }
+}
+```
