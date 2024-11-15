@@ -19,10 +19,10 @@ suppressPackageStartupMessages({
 
 et <- read_csv("data/eventtypes.csv", show_col_types = FALSE)
 et <- et |> 
-  mutate(usage_notes = str_replace_all(usage_notes, "(‚Äú)|(‚Äù)", "\""),
-         usage_notes = str_replace_all(usage_notes, "‚Äô", "'"),
-         example = str_replace_all(example, "(‚Äú)|(‚Äù)", "\""),
-         example = str_replace_all(example, "‚Äô", "'"))
+  mutate(usage_notes = str_replace_all(usage_notes, "‚Äú|‚Äù", "\""),
+         usage_notes = str_replace_all(usage_notes, "‚Äô|‚Äò", "'"),
+         example = str_replace_all(example, "‚Äú|‚Äù", "\""),
+         example = str_replace_all(example, "‚Äô|‚Äò", "'"))
 
 for (i in 1:nrow(et)) {
   row <- et[i, ]
